@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Factor Finder</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+</style>
+</head>
+<body>
+
+<h2>Prime Factor Finder</h2>
+
+<div>
+  <label for="number">Enter a positive integer:</label>
+  <input type="number" id="number" min="1">
+  <button onclick="findPrimeFactors()">Find Prime Factors</button>
+</div>
+<p>
+<div id="result"></div>
+
+<script>
+function findPrimeFactors() {
+  var numberInput = document.getElementById("number");
+  var number = parseInt(numberInput.value);
+  
+  if (isNaN(number) || number <= 0 || !Number.isInteger(number)) {
+    alert("Please enter a positive integer.");
+    return;
+  }
+  
+  var factors = [];
+  
+  // Find all factors
+  for (var i = 2; i <= Math.sqrt(number); i++) {
+    while (number % i === 0) {
+      factors.push(i);
+      number /= i;
+    }
+  }
+  
+  if (number !== 1) {
+    factors.push(number);
+  }
+  
+  // Display factors
+  var resultDiv = document.getElementById("result");
+  resultDiv.innerHTML = "Prime factors of " + numberInput.value + " are: " + factors.join(', ');
+}
+</script>
+
+</body>
+</html>
